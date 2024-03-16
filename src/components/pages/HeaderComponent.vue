@@ -5,7 +5,7 @@ const props = defineProps({
 })
 </script>
 <template>
-  <div class="w-full bg-[#412c3a] p-12">
+  <div class="w-full p-12">
     <div class="flex justify-between">
       <input
         type="text"

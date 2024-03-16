@@ -38,7 +38,7 @@ const currentView = computed(() => {
 <template>
   <div class="w-screen h-screen flex font-exo">
     <NavBarComponent />
-    <div class="flex flex-col w-full bg-[#167]">
+    <div class="flex flex-col w-full bg-[#26282B]">
       <HeaderComponent :auth="auth" :profile="profile" />
       <component :is="currentView" :authed="authed" :auth="auth" :profile="profile" />
     </div>
