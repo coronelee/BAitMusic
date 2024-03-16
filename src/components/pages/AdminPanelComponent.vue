@@ -15,7 +15,6 @@ onMounted(() => {
   axios.get('https://ba59ddafd916204d.mokky.dev/albums').then((response) => {
     albumData.value.push(response.data)
   })
-  console.log(albumData.value)
 })
 
 const state = ref(0)
@@ -26,6 +25,50 @@ const createNewAlbum = () => {
     logoSrc: document.getElementById('albumLogo').value
   })
 }
+
+const editAlbum = () => {
+  // console.log(document.getElementById('oldAlbumName').value)
+  // axios
+  //   .patch(
+  //     'https://ba59ddafd916204d.mokky.dev/albums?name=' +
+  //       document.getElementById('oldAlbumName').value,
+  //     {
+  //       name: document.getElementById('albumName').value,
+  //       author: document.getElementById('albumAuthor').value,
+  //       logoSrc: document.getElementById('albumLogo').value
+  //     }
+  //   )
+  //   .then((response) => console.log(response.data))
+  //   .catch((error) => console.error(error))
+  // const headers = {}
+  // const data = {
+  //   name: document.getElementById('albumNameEdit').value,
+  //   author: document.getElementById('albumAuthorEdit').value,
+  //   logoSrc: document.getElementById('albumLogoEdit').value
+  // }
+  // axios
+  //   .patch(
+  //     `https://ba59ddafd916204d.mokky.dev/albums?name=${document.getElementById('oldAlbumNameEdit').value}`,
+  //     data,
+  //     { headers }
+  //   )
+  //   .then((response) => {
+  //     console.log(response)
+  //   })
+  //   .catch(function (error) {
+  //     console.log(error.response)
+  //   })
+  // axios.patch(
+  //   'https://ba59ddafd916204d.mokky.dev/albums?name=' +
+  //     document.getElementById('oldAlbumNameEdit').value,
+  //   {
+  //     name: document.getElementById('albumNameEdit').value,
+  //     author: document.getElementById('albumAuthorEdit').value,
+  //     logoSrc: document.getElementById('albumLogoEdit').value
+  //   },
+  //   {}
+  // )
+}
 </script>
 
 <template>
@@ -33,9 +76,33 @@ const createNewAlbum = () => {
     <div
       class="flex gap-12 items-start [&>button]:border [&>button]:border-white/25 [&>button]:rounded [&>button]:px-4 [&>button]:py-2 [&>button]:transition [&>button]:duration-700"
     >
-      <button @click="state = 0">Add album</button>
-      <button @click="state = 1">Edit album</button>
-      <button @click="state = 2">Add single</button>
+      <button
+        @click="state = 0"
+        :style="{
+          backgroundColor: state === 0 ? 'white' : '',
+          color: state === 0 ? '#26282B' : 'white'
+        }"
+      >
+        Add album
+      </button>
+      <button
+        @click="state = 1"
+        :style="{
+          backgroundColor: state === 1 ? 'white' : '',
+          color: state === 1 ? '#26282B' : 'white'
+        }"
+      >
+        Edit album
+      </button>
+      <button
+        @click="state = 2"
+        :style="{
+          backgroundColor: state === 2 ? 'white' : '',
+          color: state === 2 ? '#26282B' : 'white'
+        }"
+      >
+        Add single
+      </button>
     </div>
     <div
       class="flex flex-col gap-8 w-1/3 [&>input]:h-14 [&>input]:rounded [&>input]:bg-white/5 [&>input]:px-4 [&>input]:py-2 [&>input]:border-b [&>input]:border-white/25 [&>input]:overflow-hidden [&>input]:cursor-pointer [&>input]:text-white [&>input]:outline-none [&>input:focus]:bg-white/15 [&>input]:transition [&>input]:duration-700"
@@ -61,6 +128,7 @@ const createNewAlbum = () => {
     >
       <select
         class="bg-transparent appearance-none h-14 rounded bg-white/5 px-4 py-2 border-b border-white/25 overflow-hidden cursor-pointer text-white outline-none [&>select:focus]:bg-white/15 transition duration-700"
+        id="oldAlbumNameEdit"
       >
         <option
           v-for="album in albumData[0]"
@@ -71,10 +139,12 @@ const createNewAlbum = () => {
           {{ album.name }}
         </option>
       </select>
-      <input type="text" placeholder="New name" />
-      <input type="text" placeholder="New author" />
+      <input type="text" placeholder="New name" id="albumNameEdit" />
+      <input type="text" placeholder="New author" id="albumAuthorEdit" />
+      <input type="text" placeholder="New icon" id="albumLogoEdit" />
       <button
         class="text-white bg-[#412c3a] text-center border px-4 py-2 rounded active:bg-white/50 hover:bg-white/25 transition duration-350"
+        @click="editAlbum"
       >
         Edit
       </button>

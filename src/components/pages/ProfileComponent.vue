@@ -2,7 +2,7 @@
 const props = defineProps({
   profile: String
 })
-import AdminPanelComponent from '../AdminPanelComponent.vue'
+import AdminPanelComponent from './AdminPanelComponent.vue'
 </script>
 
 <template>

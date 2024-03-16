@@ -36,7 +36,7 @@ const currentView = computed(() => {
 })
 </script>
 <template>
-  <div class="w-screen h-screen flex font-exo">
+  <div class="w-screen min-h-screen flex font-exo">
     <NavBarComponent />
     <div class="flex flex-col w-full bg-[#26282B]">
       <HeaderComponent :auth="auth" :profile="profile" />

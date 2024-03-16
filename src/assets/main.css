@@ -10,3 +10,7 @@
   font-family: 'exo_italic';
   src: url('/fonts/exo-italic.ttf');
 }
+html,
+body {
+  background-color: #000000;
+}
