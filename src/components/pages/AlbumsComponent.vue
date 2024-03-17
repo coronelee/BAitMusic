@@ -59,7 +59,7 @@ onMounted(() => {
               <span class="text-[#7C7C7C] max-[500px]:text-sm">{{ item.author }}</span>
             </div>
           </div>
-          <img src="/globalImages/love.svg" alt="" class="w-6" />
+          <img src="/globalImages/love.svg" alt="" class="w-6 max-[450px]:hidden" />
         </span>
       </div>
     </div>
