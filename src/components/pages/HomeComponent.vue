@@ -14,7 +14,7 @@ const openAlbum = (value, data) => {
 }
 </script>
 <template>
-  <div class="w-full h-full p-12 pt-0 pb-[200px]">
+  <div class="w-full h-full p-12 pt-0 pb-[200px] max-[380px]:p-6">
     <div class="flex flex-col gap-10" v-if="!album">
       <SelectionComponent
         title="Weekly Top Albums"

@@ -24,16 +24,18 @@ onMounted(() => {
 </script>
 <template>
   <div class="w-full">
-    <span class="text-white text-2xl"
-      >{{ props.title }}
+    <span
+      class="text-white text-2xl flex justify-between max-[380px]:justify-center max-[380px]:items-center flex-wrap gap-y-4"
+    >
+      <span class="flex max-[380px]:text-lg">{{ props.title }}</span>
       <button
         @click="() => (maxLength = maxLength == data.length ? 5 : data.length)"
         class="text-white/50 border border-white/25 px-4 py-2 ml-8 rounded active:bg-white/50 hover:bg-white/25 transition duration-350"
       >
         {{ maxLength == data.length ? 'Show less' : 'Show all' }}
-      </button></span
-    >
-    <div class="flex justify-start flex-wrap gap-8 mt-10">
+      </button>
+    </span>
+    <div class="flex justify-start max-[380px]:justify-center flex-wrap gap-8 mt-10">
       <div
         class="p-4 w-[182px] flex flex-col items-center bg-[#1F1F1F] rounded-xl hover:bg-white/5 transition duration-500 cursor-pointer"
         v-for="item in data.slice(0, maxLength)"

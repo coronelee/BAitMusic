@@ -34,9 +34,13 @@ const auth = ref(false)
 const profile = ref('')
 const player = ref(false)
 const playerData = ref([])
-
+const playerArt = ref(false)
 const editPlayer = (data, value) => {
   if (value != 'albums') {
+    playerArt.value = false
+    if (value == 'artist') {
+      playerArt.value = true
+    }
     player.value = true
     playerData.value = data
   }
@@ -47,7 +51,7 @@ const authed = (profileEmail, status) => {
 }
 </script>
 <template>
-  <div class="w-screen min-h-screen flex font-exo">
+  <div class="min-h-screen flex font-exo overflow-hidden">
     <NavBarComponent />
     <div class="flex flex-col w-full bg-[#26282B]">
       <HeaderComponent :auth="auth" :profile="profile" />
@@ -59,6 +63,11 @@ const authed = (profileEmail, status) => {
         :editPlayer="editPlayer"
       />
     </div>
-    <PlayerComponent v-if="player" :playerData="playerData" :editPlayer="editPlayer" />
+    <PlayerComponent
+      v-if="player"
+      :playerData="playerData"
+      :editPlayer="editPlayer"
+      :playerArt="playerArt"
+    />
   </div>
 </template>

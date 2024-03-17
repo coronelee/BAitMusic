@@ -29,22 +29,16 @@ onMounted(() => {
 </script>
 
 <template>
-  <div class="w-full h-full font-exo p-12 pt-0 pb-[200px]">
-    <img
-      v-if="!album"
-      src="/globalImages/home/back.svg"
-      alt=""
-      class="cursor-pointer w-10"
-      @click="openAlbum('', '')"
-    />
+  <div class="h-full font-exo p-12 pt-0 pb-[200px]">
     <div v-if="!album">
-      <div class="flex gap-12 mt-4 items-center">
+      <div class="flex gap-12 mt-4 items-center max-[700px]:hidden">
         <img src="/globalImages/albums.jpg" alt="icon" class="w-[250px] h-[250px] rounded-xl" />
         <div class="flex flex-col gap-1 h-full py-10">
-          <span class="text-2xl font-bold text-white">Mix albums </span>
+          <span class="text-2xl font-bold text-white"
+            >List of <b class="text-[#7C7C9c]">albums</b>
+          </span>
           <span class="text-[#7C7C7C] flex gap-4 flex-wrap">
-            <span v-for="item in authors.slice(0, 5)" :key="item" class="odd:text-[#7C7C9c]"
-              >{{ item }} </span
+            <span v-for="item in authors.slice(0, 5)" :key="item">{{ item }} </span
             >{{ authors.length > 5 ? 'etc...' : '' }}
           </span>
           <span class="text-white/60 text-lg">{{ data.length }} albums</span>
@@ -61,8 +55,8 @@ onMounted(() => {
             <span class="text-center w-[30px]">{{ item.id }}</span>
             <img :src="item.logoSrc" alt="icon" class="w-[50px] h-[50px]" />
             <div class="flex flex-col">
-              <span class="text-md font-bold text-white">{{ item.name }}</span>
-              <span class="text-[#7C7C7C]">{{ item.author }}</span>
+              <span class="text-md font-bold text-white max-[500px]:text-sm">{{ item.name }}</span>
+              <span class="text-[#7C7C7C] max-[500px]:text-sm">{{ item.author }}</span>
             </div>
           </div>
           <img src="/globalImages/love.svg" alt="" class="w-6" />

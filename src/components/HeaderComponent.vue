@@ -9,7 +9,7 @@ const props = defineProps({
     <div class="flex justify-between">
       <input
         type="text"
-        class="w-1/4 bg-[url('/globalImages/home/search.svg')] bg-no-repeat bg-[length:24px] bg-[99%] h-10 px-4 py-2 rounded bg-white/5 border-b border-white/25 overflow-hidden cursor-pointer text-white outline-none focus:bg-white/15 transition duration-700"
+        class="w-1/4 max-[870px]:hidden bg-[url('/globalImages/home/search.svg')] bg-no-repeat bg-[length:24px] bg-[99%] h-10 px-4 py-2 rounded bg-white/5 border-b border-white/25 overflow-hidden cursor-pointer text-white outline-none focus:bg-white/15 transition duration-700"
         placeholder="Search"
       />
       <div

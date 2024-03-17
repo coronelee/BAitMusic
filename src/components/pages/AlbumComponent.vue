@@ -32,7 +32,7 @@ onMounted(() => {
     />
     <div class="flex gap-12 mt-4 items-center">
       <img :src="dataAlbum.logoSrc" alt="icon" class="w-[250px] h-[250px] rounded-xl" />
-      <div class="flex flex-col gap-1 h-full py-10">
+      <div class="flex flex-col gap-1 h-full py-10 max-[600px]:hidden">
         <span class="text-2xl font-bold text-white">{{ dataAlbum.name }}</span>
         <a class="text-[#7C7C7C]">{{ dataAlbum.author }}</a>
         <span class="text-[#7C7C7C]">{{ album.length }} songs</span>
