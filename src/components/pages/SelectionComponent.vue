@@ -35,7 +35,7 @@ onMounted(() => {
     >
     <div class="flex justify-start flex-wrap gap-8 mt-10">
       <div
-        class="p-4 w-[182px] flex flex-col items-center bg-[#1F1F1F] rounded-xl"
+        class="p-4 w-[182px] flex flex-col items-center bg-[#1F1F1F] rounded-xl hover:bg-white/5 transition duration-500 cursor-pointer"
         v-for="item in data.slice(0, maxLength)"
         :key="item.id"
         @click="props.editPlayer(item, props.value), openAlbum(props.value, item)"

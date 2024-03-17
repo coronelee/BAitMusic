@@ -31,9 +31,9 @@ onMounted(() => {
       } else currentTime.value = min + ':' + sec
 
       document.getElementById('timeline').value = this.currentTime
-      //   if (this.currentTime == this.duration) {
-      //     nextPrevMusic(+1);
-      //   }
+      if (this.currentTime == this.duration) {
+        nextPrevMusic(+1)
+      }
     }, 1000)
 
     let minDur = String(Number(String(this.duration).split('.')[0]) / 60).split('.')[0]
@@ -106,7 +106,7 @@ const nextPrevMusic = (value) => {
     <div class="flex">
       <img :src="playerData.logoSrc" alt="icon" class="h-full rounded" />
       <div class="flex flex-col gap-1 p-6 text-white justify-center">
-        <span class="text-2xl font-bold">{{ playerData.name }}</span>
+        <span class="text-2xl">{{ playerData.name }}</span>
         <span class="text-[#7C7C7C]">{{ playerData.author }}</span>
       </div>
     </div>

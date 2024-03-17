@@ -16,8 +16,8 @@ const props = defineProps({
         class="flex gap-4 text-white [&>a]:border [&>a]:border-white/25 [&>a]:rounded [&>a]:px-4 [&>a]:py-2 [&>a]:transition [&>a]:duration-700"
         v-if="!props.auth"
       >
-        <a href="#/auth" class="hover:bg-white hover:text-[#412c3a]">Login</a>
-        <a href="#/reg" class="bg-white text-[#412c3a] hover:bg-[#412c3a] hover:text-white"
+        <a href="#/auth" class="hover:bg-white hover:text-[#26282B]">Login</a>
+        <a href="#/reg" class="bg-white text-[#26282B] hover:bg-transparent hover:text-white"
           >Sign up</a
         >
       </div>

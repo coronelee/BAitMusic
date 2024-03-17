@@ -18,8 +18,8 @@ onMounted(() => {
       for (let i = 0; i < album.value.length; i++) {
         albumAll.value[i] = album.value[i].id
       }
-      console.log(albumAll.value + '      ' + album.value)
     })
+  console.log(album.value)
 })
 </script>
 <template>
@@ -31,10 +31,10 @@ onMounted(() => {
       @click="openAlbum('', '')"
     />
     <div class="flex gap-12 mt-4 items-center">
-      <img :src="dataAlbum.logoSrc" alt="icon" class="w-[250px] h-[250px]" />
+      <img :src="dataAlbum.logoSrc" alt="icon" class="w-[250px] h-[250px] rounded-xl" />
       <div class="flex flex-col gap-1 h-full py-10">
         <span class="text-2xl font-bold text-white">{{ dataAlbum.name }}</span>
-        <span class="text-[#7C7C7C]">{{ dataAlbum.author }}</span>
+        <a class="text-[#7C7C7C]">{{ dataAlbum.author }}</a>
         <span class="text-[#7C7C7C]">{{ album.length }} songs</span>
       </div>
     </div>
