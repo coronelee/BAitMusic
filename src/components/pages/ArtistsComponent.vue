@@ -1,7 +1,6 @@
 <script setup>
 import axios from 'axios'
 import { onMounted, ref } from 'vue'
-import AlbumComponent from './AlbumComponent.vue'
 import PageArtist from './PageArtist.vue'
 
 const artistPage = ref(false)
