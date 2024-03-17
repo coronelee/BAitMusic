@@ -1,29 +1,40 @@
 <script setup>
-import axios from 'axios'
-import { onMounted, ref } from 'vue'
+import { ref } from 'vue'
 import SelectionComponent from './SelectionComponent.vue'
-
-let dataAlbums = ref([])
-let loading = ref(true)
-onMounted(() => {
-  try {
-    loading.value = true
-
-    axios.get('https://ba59ddafd916204d.mokky.dev/albums').then((response) => {
-      dataAlbums.value = response.data
-      console.log(dataAlbums.value)
-    })
-  } catch (err) {
-    console.log(err)
-  } finally {
-    loading.value = false
-  }
+import AlbumComponent from './AlbumComponent.vue'
+const props = defineProps({
+  editPlayer: Function
 })
+
+const album = ref(false)
+const dataAlbum = ref([])
+const openAlbum = (value, data) => {
+  value == 'albums' ? (album.value = true) : (album.value = false)
+  dataAlbum.value = data
+}
 </script>
 <template>
-  <div class="w-full h-full p-12 flex flex-col gap-10">
-    <SelectionComponent title="Weekly Top Singles" :dataAlbums="dataAlbums" v-if="!loading" />
-    <SelectionComponent title="Weekly Top Singles" :dataAlbums="dataAlbums" v-if="!loading" />
-    <!-- <SelectionComponent title="Weekly Top Albums" :items="arr" /> -->
+  <div class="w-full h-full p-12 pt-0 pb-[200px]">
+    <div class="flex flex-col gap-10" v-if="!album">
+      <SelectionComponent
+        title="Weekly Top Albums"
+        value="albums"
+        :editPlayer="props.editPlayer"
+        :openAlbum="openAlbum"
+      />
+      <SelectionComponent
+        title="Weekly Top Singles"
+        value="singles"
+        :editPlayer="props.editPlayer"
+        :openAlbum="openAlbum"
+      />
+    </div>
+    <component
+      :is="AlbumComponent"
+      :dataAlbum="dataAlbum"
+      :openAlbum="openAlbum"
+      :editPlayer="props.editPlayer"
+      v-else
+    />
   </div>
 </template>

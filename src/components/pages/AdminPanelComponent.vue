@@ -26,48 +26,14 @@ const createNewAlbum = () => {
   })
 }
 
-const editAlbum = () => {
-  // console.log(document.getElementById('oldAlbumName').value)
-  // axios
-  //   .patch(
-  //     'https://ba59ddafd916204d.mokky.dev/albums?name=' +
-  //       document.getElementById('oldAlbumName').value,
-  //     {
-  //       name: document.getElementById('albumName').value,
-  //       author: document.getElementById('albumAuthor').value,
-  //       logoSrc: document.getElementById('albumLogo').value
-  //     }
-  //   )
-  //   .then((response) => console.log(response.data))
-  //   .catch((error) => console.error(error))
-  // const headers = {}
-  // const data = {
-  //   name: document.getElementById('albumNameEdit').value,
-  //   author: document.getElementById('albumAuthorEdit').value,
-  //   logoSrc: document.getElementById('albumLogoEdit').value
-  // }
-  // axios
-  //   .patch(
-  //     `https://ba59ddafd916204d.mokky.dev/albums?name=${document.getElementById('oldAlbumNameEdit').value}`,
-  //     data,
-  //     { headers }
-  //   )
-  //   .then((response) => {
-  //     console.log(response)
-  //   })
-  //   .catch(function (error) {
-  //     console.log(error.response)
-  //   })
-  // axios.patch(
-  //   'https://ba59ddafd916204d.mokky.dev/albums?name=' +
-  //     document.getElementById('oldAlbumNameEdit').value,
-  //   {
-  //     name: document.getElementById('albumNameEdit').value,
-  //     author: document.getElementById('albumAuthorEdit').value,
-  //     logoSrc: document.getElementById('albumLogoEdit').value
-  //   },
-  //   {}
-  // )
+const addMusic = () => {
+  // console.log(document.getElementById('albumName').value)
+  axios.post('https://ba59ddafd916204d.mokky.dev/dataAlbums', {
+    idAlbum: document.getElementById('albumName').value,
+    name: document.getElementById('nameMusic').value,
+    author: document.getElementById('srcMusic').value,
+    logoSrc: document.getElementById('logoMusic').value
+  })
 }
 </script>
 
@@ -92,7 +58,7 @@ const editAlbum = () => {
           color: state === 1 ? '#26282B' : 'white'
         }"
       >
-        Edit album
+        Add music
       </button>
       <button
         @click="state = 2"
@@ -123,30 +89,25 @@ const editAlbum = () => {
       </button>
     </div>
     <div
-      class="flex flex-col gap-8 w-1/3 [&>input]:h-14 [&>input]:rounded [&>input]:bg-white/5 [&>input]:px-4 [&>input]:py-2 [&>input]:border-b [&>input]:border-white/25 [&>input]:overflow-hidden [&>input]:cursor-pointer [&>input]:text-white [&>input]:outline-none [&>select:focus]:bg-white/15 [&>input]:transition [&>input]:duration-700"
+      class="flex flex-col gap-8 [&>input]:h-14 [&>input]:rounded [&>input]:bg-white/5 [&>input]:px-4 [&>input]:py-2 [&>input]:border-b [&>input]:border-white/25 [&>input]:overflow-hidden [&>input]:cursor-pointer [&>input]:text-white [&>input]:outline-none [&>select:focus]:bg-white/15 [&>input]:transition [&>input]:duration-700"
       v-if="state === 1"
     >
       <select
         class="bg-transparent appearance-none h-14 rounded bg-white/5 px-4 py-2 border-b border-white/25 overflow-hidden cursor-pointer text-white outline-none [&>select:focus]:bg-white/15 transition duration-700"
-        id="oldAlbumNameEdit"
+        id="albumName"
       >
-        <option
-          v-for="album in albumData[0]"
-          :value="album.name"
-          :key="album.id"
-          class="text-black"
-        >
+        <option v-for="album in albumData[0]" :value="album.id" :key="album.id" class="text-black">
           {{ album.name }}
         </option>
       </select>
-      <input type="text" placeholder="New name" id="albumNameEdit" />
-      <input type="text" placeholder="New author" id="albumAuthorEdit" />
-      <input type="text" placeholder="New icon" id="albumLogoEdit" />
+      <input type="text" placeholder="name" id="nameMusic" />
+      <input type="text" placeholder="src" id="srcMusic" value="/music/albums/.mp3" />
+      <input type="text" placeholder="logo" id="logoMusic" value="/iconAlbums/" />
       <button
         class="text-white bg-[#412c3a] text-center border px-4 py-2 rounded active:bg-white/50 hover:bg-white/25 transition duration-350"
-        @click="editAlbum"
+        @click="addMusic"
       >
-        Edit
+        Add
       </button>
     </div>
 

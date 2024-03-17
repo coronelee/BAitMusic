@@ -7,8 +7,9 @@ import ArtistsComponent from './components/pages/ArtistsComponent.vue'
 import FavoritesComponent from './components/pages/FavoritesComponent.vue'
 import AuthComponent from './components/pages/AuthComponent.vue'
 import RegComponent from './components/pages/RegComponent.vue'
-import HeaderComponent from './components/pages/HeaderComponent.vue'
+import HeaderComponent from './components/HeaderComponent.vue'
 import ProfileComponent from './components/pages/ProfileComponent.vue'
+import PlayerComponent from './components/PlayerComponent.vue'
 
 const routes = {
   '/': HomeComponent,
@@ -21,6 +22,16 @@ const routes = {
 }
 const auth = ref(false)
 const profile = ref('')
+const player = ref(false)
+const playerData = ref([])
+
+const editPlayer = (data, value) => {
+  console.log(data)
+  if (value != 'albums') {
+    player.value = true
+    playerData.value = data
+  }
+}
 const authed = (profileEmail, status) => {
   profile.value = profileEmail
   status == 201 ? (auth.value = true) : (auth.value = false)
@@ -40,7 +51,14 @@ const currentView = computed(() => {
     <NavBarComponent />
     <div class="flex flex-col w-full bg-[#26282B]">
       <HeaderComponent :auth="auth" :profile="profile" />
-      <component :is="currentView" :authed="authed" :auth="auth" :profile="profile" />
+      <component
+        :is="currentView"
+        :authed="authed"
+        :auth="auth"
+        :profile="profile"
+        :editPlayer="editPlayer"
+      />
     </div>
+    <PlayerComponent v-if="player" :playerData="playerData" :editPlayer="editPlayer" />
   </div>
 </template>
