@@ -6,7 +6,7 @@ const props = defineProps({
 </script>
 <template>
   <div class="w-full p-12">
-    <div class="flex justify-between">
+    <div class="flex justify-between max-[870px]:justify-end">
       <input
         type="text"
         class="w-1/4 max-[870px]:hidden bg-[url('/globalImages/home/search.svg')] bg-no-repeat bg-[length:24px] bg-[99%] h-10 px-4 py-2 rounded bg-white/5 border-b border-white/25 overflow-hidden cursor-pointer text-white outline-none focus:bg-white/15 transition duration-700"

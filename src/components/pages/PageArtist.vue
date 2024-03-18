@@ -26,7 +26,7 @@ const maxLength = ref(10)
 <template>
   <div class="w-full h-full font-exo">
     <div
-      class="w-full h-[400px] max-[460px]:w-[200px] bg-center bg-cover bg-no-repeat rounded-b-3xl flex flex-col p-8 justify-between items-start text-white text-5xl"
+      class="w-full h-[400px] bg-center bg-cover bg-no-repeat rounded-b-3xl flex flex-col p-8 justify-between items-start text-white text-5xl"
       id="card"
     >
       <div
@@ -35,7 +35,9 @@ const maxLength = ref(10)
       >
         <img src="/globalImages/home/back.svg" alt="" class="w-10" />
       </div>
-      <span class="backdrop-blur-3xl p-6 rounded-3xl font-bold font-exo max-[600px]:text-lg">
+      <span
+        class="backdrop-blur-3xl p-6 rounded-3xl font-bold font-exo max-[600px]:w-full max-[600px]:text-lg text-center"
+      >
         {{ dataArtist.author }}</span
       >
     </div>

@@ -4,7 +4,9 @@ import axios, { formToJSON } from 'axios'
 const props = defineProps({
   playerData: Array,
   editPlayer: Function,
-  playerArt: Boolean
+  playerArt: Boolean,
+  openFullPlayer: Function,
+  fullPlayer: Boolean
 })
 
 const pause = ref(false)
@@ -63,6 +65,7 @@ const hidePLayer = () => {
 }
 const nextPrevMusic = (value) => {
   let oldId = [props.playerData.id, props.playerData.idAlbum]
+
   if (value > 0) {
     if (props.playerArt) {
       axios
@@ -151,8 +154,64 @@ const nextPrevMusic = (value) => {
 </script>
 <template>
   <div
+    v-if="fullPlayer"
+    class="w-screen h-screen bg-[#1F1F1F] absolute z-10 top-0 left-0 flex flex-col justify-between items-start p-8"
+  >
+    <img
+      src="/globalImages/home/back.svg"
+      alt=""
+      class="cursor-pointer w-10"
+      @click="props.openFullPlayer()"
+    />
+    <img :src="playerData.logoSrc" alt="" class="w-full rounded-xl" />
+    <div class="h-1/3 w-full flex flex-col justify-end">
+      <div class="flex justify-between w-full">
+        <div class="flex flex-col gap-1 text-white font-exo">
+          <span>{{ playerData.name }}</span>
+          <span class="text-[#7C7C7C]">{{ playerData.author }}</span>
+        </div>
+        <img src="/globalImages/love.svg" alt="like" class="w-6" />
+      </div>
+      <input
+        type="range"
+        class="w-full mt-2 bottom-0 left-0"
+        :max="maxRange"
+        defaultValue="0"
+        id="timeline"
+        @input="audio.currentTime = $event.target.value"
+      />
+      <div class="flex justify-between w-full text-white font-exo">
+        <span>{{ currentTime }}</span>
+        <span>{{ durationTime }}</span>
+      </div>
+      <div
+        class="flex justify-center w-full items-center gap-4 [&>img]:w-8 [&>img]:cursor-pointer [&>img]:h-8"
+      >
+        <img
+          src="/globalImages/player/nextPrevMusic.svg"
+          alt="prev"
+          class="rotate-180"
+          @click="() => nextPrevMusic(-1)"
+        />
+        <img
+          :src="pause ? '/globalImages/player/pause.svg' : '/globalImages/player/play.svg'"
+          alt="pause"
+          class="right-12 top-1/3"
+          @click="() => (audio.paused ? audio.play() : audio.pause(), (pause = !pause))"
+        />
+        <img
+          src="/globalImages/player/nextPrevMusic.svg"
+          alt="next"
+          @click="() => nextPrevMusic(+1)"
+        />
+      </div>
+    </div>
+  </div>
+  <div
     class="w-full p-6 max-[980px]:p-4 overflow-hidden fixed bottom-0 h-[150px] max-[980px]:h-auto bg-[#1F1F1F] flex justify-between gap-8 [&>div]:w-1/3 max-[980px]:[&>div]:w-auto [&>div]:h-full max-[980px]:m-2 max-[980px]:w-[calc(100%-16px)] max-[980px]:rounded-xl"
     id="player"
+    @click="openFullPlayer()"
+    v-else
   >
     <div class="flex">
       <img :src="playerData.logoSrc" alt="icon" class="h-full rounded max-[980px]:h-16" />

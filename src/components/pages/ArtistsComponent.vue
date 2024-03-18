@@ -42,7 +42,7 @@ const countTracks = (artist) => {
 }
 </script>
 <template>
-  <div class="w-full h-full font-exo p-12 pt-0 pb-[200px]">
+  <div class="w-full h-full font-exo p-12 max-[1050px]:p-4 pt-0 pb-[200px]">
     <div v-if="!artistPage">
       <div class="flex gap-12 mt-4 items-center max-[700px]:hidden">
         <img src="/globalImages/micro.jpeg" alt="icon" class="w-[250px] rounded-xl" />
@@ -61,17 +61,17 @@ const countTracks = (artist) => {
         <span
           v-for="item in data"
           :key="item.id"
-          class="text-white pr-4 max-[650px]:w-[300px] max-[460px]:w-[200px] max-[460px]:h-[200px] overflow-hidden text-lg bg-white/5 flex items-center gap-4 rounded-xl justify-between cursor-pointer hover:bg-white/10 transition duration-300"
+          class="text-white pr-4 max-[650px]:pr-0 w-full h-[200px] overflow-hidden text-lg bg-white/5 flex items-center gap-4 rounded-xl justify-between cursor-pointer hover:bg-white/10 transition duration-300"
           @click="openArtist('albums', item)"
         >
-          <div class="flex items-center gap-4">
+          <div class="flex items-center w-full gap-4">
             <div
               alt="icon"
-              class="w-[300px] h-[200px] bg-cover bg-no-repeat bg-center flex justify-center items-center max-[460px]:w-[200px] max-[460px]:h-[200px] rounded-xl"
+              class="w-[300px] h-[200px] max-[650px]:w-full bg-cover bg-no-repeat bg-center flex justify-center items-center"
               :style="{ backgroundImage: `url(${item.imageArtist})` }"
             >
               <div
-                class="flex flex-col min-[650px]:hidden p-6 backdrop-blur-sm rounded-2xl bg-black/10"
+                class="flex flex-col min-[650px]:hidden w-full p-6 backdrop-blur-sm rounded-2xl bg-black/10"
               >
                 <span class="text-md font-bold text-white">{{ item.author }}</span>
                 <span class="text-[#7C7C7C]"
