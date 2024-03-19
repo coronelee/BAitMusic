@@ -13,11 +13,11 @@
       <a href="#/artists"
         ><img src="/globalImages/nav/artists.svg" alt="artists" /><span>Artists</span></a
       >
-      <a href="#/favorites"
+      <!-- <a href="#/favorites"
         ><img src="/globalImages/nav/favorites.svg" alt="favorites" /><span>
           Your favorites</span
         ></a
-      >
+      > -->
     </div>
   </nav>
 </template>

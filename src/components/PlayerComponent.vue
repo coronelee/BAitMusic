@@ -1,6 +1,6 @@
 <script setup>
 import { onMounted, ref, watch } from 'vue'
-import axios, { formToJSON } from 'axios'
+import axios from 'axios'
 const props = defineProps({
   playerData: Array,
   editPlayer: Function,
@@ -21,7 +21,6 @@ onMounted(() => {
   audio.src = props.playerData.src
   audio.play()
   pause.value = true
-
   currentTime.value = audio.currentTime
   durationTime.value = audio.duration
 
@@ -63,91 +62,69 @@ watch(
 const hidePLayer = () => {
   document.getElementById('player').classList.add('hidden')
 }
+
+const url = 'https://ba59ddafd916204d.mokky.dev/dataAlbums'
 const nextPrevMusic = (value) => {
   let oldId = [props.playerData.id, props.playerData.idAlbum]
 
   if (value > 0) {
     if (props.playerArt) {
-      axios
-        .get(`https://ba59ddafd916204d.mokky.dev/dataAlbums?author=${props.playerData.author}`)
-        .then((response) => {
-          if (response.data[response.data.length - 1].id == oldId[0]) {
+      axios.get(`${url}?author=${props.playerData.author}`).then((response) => {
+        if (response.data[response.data.length - 1].id == oldId[0]) {
+          for (let i = 0; i < response.data.length + 1; i++) {
+            if (response.data[i].id == oldId[0]) {
+              props.editPlayer(response.data[0], 'artist')
+              break
+            }
+          }
+        } else {
+          axios.get(`${url}?author=${props.playerData.author}`).then((response) => {
             for (let i = 0; i < response.data.length + 1; i++) {
               if (response.data[i].id == oldId[0]) {
-                props.editPlayer(response.data[0], 'artist')
+                props.editPlayer(response.data[i + 1], 'artist')
                 break
               }
             }
-          } else {
-            axios
-              .get(
-                `https://ba59ddafd916204d.mokky.dev/dataAlbums?author=${props.playerData.author}`
-              )
-              .then((response) => {
-                for (let i = 0; i < response.data.length + 1; i++) {
-                  if (response.data[i].id == oldId[0]) {
-                    props.editPlayer(response.data[i + 1], 'artist')
-                    break
-                  }
-                }
-              })
-          }
-        })
+          })
+        }
+      })
     } else {
-      axios
-        .get(`https://ba59ddafd916204d.mokky.dev/dataAlbums?idAlbum=${oldId[1]}`)
-        .then((response) => {
-          if (response.data[response.data.length - 1].id == oldId[0]) {
-            props.editPlayer(response.data[0], '')
-          } else {
-            axios
-              .get(
-                `https://ba59ddafd916204d.mokky.dev/dataAlbums?idAlbum=${oldId[1]}&id=${oldId[0] + 1}`
-              )
-              .then((response) => {
-                props.editPlayer(...response.data, '')
-              })
-          }
-        })
+      axios.get(`${url}?idAlbum=${oldId[1]}`).then((response) => {
+        if (response.data[response.data.length - 1].id == oldId[0]) {
+          props.editPlayer(response.data[0], '')
+        } else {
+          axios.get(`${url}?idAlbum=${oldId[1]}&id=${oldId[0] + 1}`).then((response) => {
+            props.editPlayer(...response.data, '')
+          })
+        }
+      })
     }
   } else {
     if (props.playerArt) {
-      axios
-        .get(`https://ba59ddafd916204d.mokky.dev/dataAlbums?author=${props.playerData.author}`)
-        .then((response) => {
-          if (response.data[0].id == oldId[0]) {
-            props.editPlayer(response.data[response.data.length - 1], 'artist')
-          } else {
-            axios
-              .get(
-                `https://ba59ddafd916204d.mokky.dev/dataAlbums?author=${props.playerData.author}`
-              )
-              .then((response) => {
-                for (let i = 0; i < response.data.length + 1; i++) {
-                  if (response.data[i].id == oldId[0]) {
-                    props.editPlayer(response.data[i - 1], 'artist')
-                    break
-                  }
-                }
-              })
-          }
-        })
+      axios.get(`${url}?author=${props.playerData.author}`).then((response) => {
+        if (response.data[0].id == oldId[0]) {
+          props.editPlayer(response.data[response.data.length - 1], 'artist')
+        } else {
+          axios.get(`${url}?author=${props.playerData.author}`).then((response) => {
+            for (let i = 0; i < response.data.length + 1; i++) {
+              if (response.data[i].id == oldId[0]) {
+                props.editPlayer(response.data[i - 1], 'artist')
+                break
+              }
+            }
+          })
+        }
+      })
     } else {
-      axios
-        .get(`https://ba59ddafd916204d.mokky.dev/dataAlbums?idAlbum=${oldId[1]}`)
-        .then((response) => {
-          if (response.data[0].id == oldId[0]) {
-            props.editPlayer(response.data[response.data.length - 1], '')
-          } else {
-            axios
-              .get(
-                `https://ba59ddafd916204d.mokky.dev/dataAlbums?idAlbum=${oldId[1]}&id=${oldId[0] - 1}`
-              )
-              .then((response) => {
-                props.editPlayer(...response.data, '')
-              })
-          }
-        })
+      axios.get(`${url}?idAlbum=${oldId[1]}`).then((response) => {
+        if (response.data[0].id == oldId[0]) {
+          props.editPlayer(response.data[response.data.length - 1], '')
+        } else {
+          axios.get(`${url}?idAlbum=${oldId[1]}&id=${oldId[0] - 1}`).then((response) => {
+            props.editPlayer(...response.data, '')
+          })
+        }
+      })
     }
   }
 }
@@ -159,7 +136,7 @@ const nextPrevMusic = (value) => {
   >
     <img
       src="/globalImages/home/back.svg"
-      alt=""
+      alt="back"
       class="cursor-pointer w-10"
       @click="props.openFullPlayer()"
     />

@@ -25,9 +25,9 @@ onMounted(() => {
 <template>
   <div class="w-full">
     <span
-      class="text-white text-2xl flex w-full justify-center items-center max-[380px]:justify-center max-[380px]:items-center flex-wrap gap-4"
+      class="text-white text-2xl flex w-full justify-start items-center max-[450px]:justify-center flex-wrap gap-4"
     >
-      <span class="flex max-[380px]:text-lg items-center justify-center">{{ props.title }}</span>
+      <span class="flex max-[380px]:text-lg items-start justify-center">{{ props.title }}</span>
       <button
         @click="() => (maxLength = maxLength == data.length ? 5 : data.length)"
         v-if="data.length > 5"
@@ -43,7 +43,7 @@ onMounted(() => {
         :key="item.id"
         @click="props.editPlayer(item, props.value), openAlbum(props.value, item)"
       >
-        <img :src="item.logoSrc" alt="" class="rounded-xl w-[150px] max-[560px]:w-full" />
+        <img :src="item.logoSrc" alt="" class="rounded-xl w-[150px]" />
         <span class="text-white text-md font-bold text-center mt-4">{{ item.name }}</span>
         <span class="text-white/80 text-sm">{{ item.author }}</span>
       </div>
